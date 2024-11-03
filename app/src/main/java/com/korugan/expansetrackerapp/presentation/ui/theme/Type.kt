@@ -1,4 +1,4 @@
-package com.korugan.expansetrackerapp.ui.theme
+package com.korugan.expansetrackerapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
