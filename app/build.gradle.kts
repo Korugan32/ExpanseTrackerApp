@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -70,8 +71,12 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
 
-    //Dependency Injection
-
+    //Dagger Hilt
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    implementation (libs.androidx.hilt.navigation.compose)
+    implementation (libs.androidx.hilt.work)
+    implementation (libs.androidx.work.runtime.ktx)
     //Coroutines
 
     //Retrofit
