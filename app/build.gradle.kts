@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -87,4 +88,7 @@ dependencies {
 
     //Navigation
     implementation(libs.navigation)
+
+    //
+    implementation ("io.github.ehsannarmani:compose-charts:0.0.17")
 }
