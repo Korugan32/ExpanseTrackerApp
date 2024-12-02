@@ -88,6 +88,8 @@ dependencies {
 
     //Navigation
     implementation(libs.navigation)
+    implementation ("com.google.accompanist:accompanist-navigation-animation:0.32.0")
+
 
     //
     implementation ("io.github.ehsannarmani:compose-charts:0.0.17")
