@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.korugan.expansetrackerapp.data.local.date_converter.DateConverter
 import com.korugan.expansetrackerapp.data.local.financial_transactions.dao.FinancialDao
 import com.korugan.expansetrackerapp.data.local.financial_transactions.entity.Financials
 
 
 @Database(entities = [Financials::class], version = 1, exportSchema = false)
+@TypeConverters(DateConverter::class)
 abstract class FinancialDatabase : RoomDatabase() {
     abstract fun financialDao(): FinancialDao
     companion object {
