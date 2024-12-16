@@ -68,9 +68,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //Room
-    implementation("androidx.room:room-runtime:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     //Dagger Hilt
     ksp(libs.hilt.compiler)
@@ -88,9 +88,9 @@ dependencies {
 
     //Navigation
     implementation(libs.navigation)
-    implementation ("com.google.accompanist:accompanist-navigation-animation:0.32.0")
+    implementation (libs.accompanist.navigation.animation)
 
 
     //
-    implementation ("io.github.ehsannarmani:compose-charts:0.0.17")
+    implementation (libs.compose.charts)
 }
