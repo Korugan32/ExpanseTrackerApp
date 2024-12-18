@@ -17,7 +17,7 @@ fun BottomBarItem(
 ) {
     Icon(
         imageVector = icon,
-        contentDescription = null,
+        contentDescription = "null",
         tint = if (isSelected) MaterialTheme.colorScheme.surfaceTint else MaterialTheme.colorScheme.inversePrimary,
         modifier = Modifier
             .size(40.dp)
