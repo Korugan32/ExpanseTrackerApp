@@ -50,7 +50,9 @@ android {
 }
 
 dependencies {
-
+    implementation ("androidx.compose.foundation:foundation:1.x.x")
+    implementation ("com.google.accompanist:accompanist-pager:0.33.0-alpha")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.33.0-alpha")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
