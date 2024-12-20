@@ -1,6 +1,5 @@
 package com.korugan.expansetrackerapp.presentation.screens.onboarding
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,13 +22,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.google.accompanist.pager.HorizontalPagerIndicator
-
 import com.korugan.expansetrackerapp.R
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen(onFinish: () -> Unit = {}) {
+fun OnBoardingScreen(viewModel : OnboardingViewModel = hiltViewModel() , navHostController: NavHostController) {
     val images = listOf(
         R.drawable.first_mage,
         R.drawable.second_mage,
@@ -91,7 +90,9 @@ fun OnBoardingScreen(onFinish: () -> Unit = {}) {
         if (pagerState.currentPage == images.size - 1) {
             Button(
                 colors = ButtonDefaults.buttonColors(Color.Black),
-                onClick = {},
+                onClick = {
+                    viewModel.completeOnboarding()
+                    navHostController.navigate("home")},
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(16.dp)
