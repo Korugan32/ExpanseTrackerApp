@@ -11,12 +11,11 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -67,12 +66,14 @@ fun OnBoardingScreen(viewModel : OnboardingViewModel = hiltViewModel() , navHost
                 )
                 Text(
                     text = titles[currentPage],
+                    color = MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center,
                     fontSize = 30.sp, fontWeight = FontWeight.ExtraBold
                 )
                 Spacer(modifier = Modifier.height(30.dp))
                 Text(
                     text = descriptions[currentPage],
+                    color = MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center,
                     fontSize = 20.sp
                 )
@@ -83,13 +84,13 @@ fun OnBoardingScreen(viewModel : OnboardingViewModel = hiltViewModel() , navHost
             pageCount = 3,
             Modifier
                 .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
+            activeColor = MaterialTheme.colorScheme.onBackground,
         )
         Spacer(modifier = Modifier.height(20.dp))
 
         if (pagerState.currentPage == images.size - 1) {
             Button(
-                colors = ButtonDefaults.buttonColors(Color.Black),
                 onClick = {
                     viewModel.completeOnboarding()
                     navHostController.navigate("home")},
@@ -101,7 +102,7 @@ fun OnBoardingScreen(viewModel : OnboardingViewModel = hiltViewModel() , navHost
             ) {
                 Text(
                     text = "Şimdi Başla",
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary,
                 )
             }
         }
