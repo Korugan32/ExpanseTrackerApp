@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
+import com.korugan.expansetrackerapp.presentation.common.components.BottomBarDesign
+import com.korugan.expansetrackerapp.presentation.screens.onboarding.OnBoardingScreen
 
 import com.korugan.expansetrackerapp.presentation.ui.theme.AppTheme
 
@@ -18,9 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-                Column(modifier = Modifier.background(MaterialTheme.colorScheme.background).fillMaxSize()){
-
-                }
+                OnBoardingScreen()
             }
         }
     }
