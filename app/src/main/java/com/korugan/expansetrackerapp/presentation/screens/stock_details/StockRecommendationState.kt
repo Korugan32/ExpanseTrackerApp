@@ -1,4 +1,4 @@
-package com.korugan.expansetrackerapp.presentation.screens.details
+package com.korugan.expansetrackerapp.presentation.screens.stock_details
 
 import com.korugan.expansetrackerapp.data.remote.stock.recommendation.dto.StockSymbolRecommendationDto
 
