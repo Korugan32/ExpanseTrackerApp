@@ -10,5 +10,5 @@ data class CryptoTickerDto(
     val quotes: Quotes,
     val rank: Int,
     val symbol: String,
-    val total_supply: Int
+    val total_supply: Long
 )
