@@ -12,7 +12,6 @@ import javax.inject.Inject
 class CryptoTickersUseCase @Inject constructor(private val cryptoRepository: CryptoRepository) {
     fun getCryptoTickers(): Flow<Resource<CryptoTickersDto>> = flow {
         try {
-            emit(Resource.Loading())
             val crypto = cryptoRepository.getCryptoTickers()
             if (crypto.isNotEmpty()) {
                 emit(Resource.Success(crypto))
@@ -22,6 +21,8 @@ class CryptoTickersUseCase @Inject constructor(private val cryptoRepository: Cry
         } catch (e: HttpException) {
             emit(Resource.Error("Error : ${e}"))
         } catch (e: IOException) {
+            emit(Resource.Error("Error : ${e}"))
+        } catch (e: Exception) {
             emit(Resource.Error("Error : ${e}"))
         }
     }

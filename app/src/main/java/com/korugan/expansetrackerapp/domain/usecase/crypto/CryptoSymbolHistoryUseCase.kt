@@ -10,9 +10,12 @@ import java.io.IOException
 import javax.inject.Inject
 
 class CryptoSymbolHistoryUseCase @Inject constructor(private val cryptoRepository: CryptoRepository) {
-    fun getCryptoSymbolHistorical(symbol: String, start: String, interval: String): Flow<Resource<CryptoSymbolHistoricalDto>> = flow {
+    fun getCryptoSymbolHistorical(
+        symbol: String,
+        start: String,
+        interval: String
+    ): Flow<Resource<CryptoSymbolHistoricalDto>> = flow {
         try {
-            emit(Resource.Loading())
             val crypto = cryptoRepository.getCryptoSymbolHistorical(symbol, start, interval)
             if (crypto.isNotEmpty()) {
                 emit(Resource.Success(crypto))
@@ -22,6 +25,8 @@ class CryptoSymbolHistoryUseCase @Inject constructor(private val cryptoRepositor
         } catch (e: HttpException) {
             emit(Resource.Error("Error : ${e}"))
         } catch (e: IOException) {
+            emit(Resource.Error("Error : ${e}"))
+        } catch (e: Exception) {
             emit(Resource.Error("Error : ${e}"))
         }
     }

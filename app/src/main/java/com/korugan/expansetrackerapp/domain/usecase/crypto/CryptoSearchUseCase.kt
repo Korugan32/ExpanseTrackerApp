@@ -12,7 +12,6 @@ import javax.inject.Inject
 class CryptoSearchUseCase @Inject constructor(private val cryptoRepository: CryptoRepository) {
     fun getCryptoSearchSymbols(q: String): Flow<Resource<CryptoSearchDto>> = flow {
         try {
-            emit(Resource.Loading())
             val crypto = cryptoRepository.getCryptoSearch(q)
             if (crypto.currencies.isNotEmpty()) {
                 emit(Resource.Success(crypto))
@@ -22,6 +21,8 @@ class CryptoSearchUseCase @Inject constructor(private val cryptoRepository: Cryp
         } catch (e: HttpException) {
             emit(Resource.Error("Error : ${e}"))
         } catch (e: IOException) {
+            emit(Resource.Error("Error : ${e}"))
+        } catch (e: Exception) {
             emit(Resource.Error("Error : ${e}"))
         }
     }
