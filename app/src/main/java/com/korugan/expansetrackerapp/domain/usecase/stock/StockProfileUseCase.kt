@@ -13,9 +13,8 @@ import javax.inject.Inject
 class StockProfileUseCase @Inject constructor(private val stockRepository: StockRepository) {
     fun getStockProfile(symbol: String): Flow<Resource<StockProfileDto>> = flow {
         try {
-            emit(Resource.Loading())
             val stock = stockRepository.getStockProfile(symbol)
-            if (stock.name.isNotEmpty()) {
+            if (!stock.name.isNullOrEmpty()) {
                 emit(Resource.Success(stock))
             } else {
                 emit(Resource.Error("No Stock Found"))
@@ -23,6 +22,8 @@ class StockProfileUseCase @Inject constructor(private val stockRepository: Stock
         } catch (e: HttpException) {
             emit(Resource.Error("Error : ${e}"))
         } catch (e: IOException) {
+            emit(Resource.Error("Error : ${e}"))
+        } catch (e: Exception) {
             emit(Resource.Error("Error : ${e}"))
         }
     }

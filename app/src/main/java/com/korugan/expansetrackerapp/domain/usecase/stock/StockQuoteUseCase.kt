@@ -13,7 +13,6 @@ import javax.inject.Inject
 class StockQuoteUseCase @Inject constructor(private val stockRepository: StockRepository) {
     fun getStockQuote(symbol: String): Flow<Resource<StockQuoteDto>> = flow {
         try {
-            emit(Resource.Loading())
             val stock = stockRepository.getStockQuote(symbol)
             if (stock.c.isFinite()) {
                 emit(Resource.Success(stock))
@@ -23,6 +22,8 @@ class StockQuoteUseCase @Inject constructor(private val stockRepository: StockRe
         } catch (e: HttpException) {
             emit(Resource.Error("Error : ${e}"))
         } catch (e: IOException) {
+            emit(Resource.Error("Error : ${e}"))
+        } catch (e: Exception) {
             emit(Resource.Error("Error : ${e}"))
         }
     }

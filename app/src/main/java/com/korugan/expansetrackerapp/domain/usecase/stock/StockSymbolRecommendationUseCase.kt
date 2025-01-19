@@ -14,7 +14,6 @@ class StockSymbolRecommendationUseCase @Inject constructor(private val stockRepo
     fun getStockRecommendation(symbol: String): Flow<Resource<StockSymbolRecommendationDto>> =
         flow {
             try {
-                emit(Resource.Loading())
                 val stock = stockRepository.getStockSymbolRecommendation(symbol)
                 if (stock.isNotEmpty()) {
                     emit(Resource.Success(stock))
@@ -24,6 +23,8 @@ class StockSymbolRecommendationUseCase @Inject constructor(private val stockRepo
             } catch (e: HttpException) {
                 emit(Resource.Error("Error : ${e}"))
             } catch (e: IOException) {
+                emit(Resource.Error("Error : ${e}"))
+            } catch (e: Exception) {
                 emit(Resource.Error("Error : ${e}"))
             }
         }

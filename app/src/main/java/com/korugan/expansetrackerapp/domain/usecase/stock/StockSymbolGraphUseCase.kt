@@ -14,7 +14,6 @@ class StockSymbolGraphUseCase @Inject constructor(
 ) {
     fun getStockSymbolGraph(symbol: String): Flow<Resource<StockSymbolGraphDto>> = flow {
         try {
-            emit(Resource.Loading())
             val stock = stockRepository.getStockSymbolGraph(symbol)
             if (stock.historical.isNotEmpty()) {
                 emit(Resource.Success(stock))
@@ -24,6 +23,8 @@ class StockSymbolGraphUseCase @Inject constructor(
         } catch (e: HttpException) {
             emit(Resource.Error("Error : ${e}"))
         } catch (e: IOException) {
+            emit(Resource.Error("Error : ${e}"))
+        } catch (e: Exception) {
             emit(Resource.Error("Error : ${e}"))
         }
     }
