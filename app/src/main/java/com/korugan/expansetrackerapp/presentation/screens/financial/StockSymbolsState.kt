@@ -1,4 +1,4 @@
-package com.korugan.expansetrackerapp.presentation.screens.assets
+package com.korugan.expansetrackerapp.presentation.screens.financial
 
 import com.korugan.expansetrackerapp.data.remote.stock.symbol.dto.StockSymbolDto
 
