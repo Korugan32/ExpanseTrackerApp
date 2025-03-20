@@ -50,49 +50,62 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.compose.foundation:foundation:1.x.x")
-    implementation ("com.google.accompanist:accompanist-pager:0.33.0-alpha")
-    implementation ("com.google.accompanist:accompanist-pager-indicators:0.33.0-alpha")
+    // AndroidX Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+
+    // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.foundation)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.runtime.livedata)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation (libs.coil.compose)
+
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 
-    //Room
+    // Navigation
+    implementation(libs.navigation)
+    implementation(libs.accompanist.navigation.animation)
+
+    // Accompanist
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+
+    // Room Database
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
-    //Dagger Hilt
-    ksp(libs.hilt.compiler)
+    // Dagger Hilt
     implementation(libs.hilt.android)
-    implementation (libs.androidx.hilt.navigation.compose)
-    implementation (libs.androidx.hilt.work)
-    implementation (libs.androidx.work.runtime.ktx)
-    //Coroutines
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.work)
+    implementation(libs.androidx.work.runtime.ktx)
+    ksp(libs.hilt.compiler)
 
-    //Retrofit
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
-    implementation (libs.okhttp)
-    implementation (libs.logging.interceptor)
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
-    //Navigation
-    implementation(libs.navigation)
-    implementation (libs.accompanist.navigation.animation)
+    // DataStore
+    implementation(libs.androidx.datastore.preferences) // Preferences
+    implementation(libs.androidx.datastore.preferences.core)
 
-
-    //
-    implementation (libs.compose.charts)
+    // Compose Charts
+    implementation(libs.compose.charts)
 }
