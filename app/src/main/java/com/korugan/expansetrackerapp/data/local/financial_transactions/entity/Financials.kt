@@ -7,11 +7,9 @@ import java.util.Date
 @Entity
 data class Financials(
     val amount : Double,
-    val category : String,
-    val symbol : String,
     val name : String,
     val description : String,
     val createDate : Date,
     @PrimaryKey(true)
-    val id : Int = 0
+    val id : Int = 0,
 )
