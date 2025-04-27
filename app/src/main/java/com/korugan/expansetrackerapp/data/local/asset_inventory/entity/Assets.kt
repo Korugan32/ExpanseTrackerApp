@@ -6,6 +6,7 @@ import java.util.Date
 
 @Entity
 data class Assets(
+    val category : Int,
     val amount: Double,
     val purchasePrice: Double,
     val symbol: String,
