@@ -4,6 +4,6 @@ import com.korugan.expansetrackerapp.data.remote.crypto.ticker.dto.CryptoTickerD
 
 data class CryptoTickerState(
     val isLoading: Boolean = false,
-    val cryptoTicker: CryptoTickerDto? = null,
+    val cryptoTickers: Map<String, CryptoTickerDto> = emptyMap(),
     val error: String = ""
 )
