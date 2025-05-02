@@ -16,19 +16,19 @@ class GoalsRepositoryImpl @Inject constructor(private val goalsDao: GoalsDao) : 
         return goalsDao.insertGoal(goal)
     }
 
-    override suspend fun deleteGoal(goal: Goals) {
-        return goalsDao.deleteGoal(goal)
+    override suspend fun deleteGoal(id : Int) {
+        return goalsDao.deleteGoal(id)
     }
 
     override suspend fun updateGoal(goal: Goals) {
         return goalsDao.updateGoal(goal)
     }
 
-    override suspend fun getGoalsByStatus(status: String): Flow<List<Goals>>{
+    override fun getGoalsByStatus(status: String): Flow<List<Goals>>{
         return goalsDao.getGoalsByStatus(status)
     }
 
-    override suspend fun getOverdueGoals(currentDate: Date): Flow<List<Goals>> {
+    override fun getOverdueGoals(currentDate: Date): Flow<List<Goals>> {
         return goalsDao.getOverdueGoals(currentDate)
     }
 }

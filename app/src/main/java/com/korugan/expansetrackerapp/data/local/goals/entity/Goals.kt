@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
 
-@Entity(tableName = "goals")
+@Entity
 data class Goals (
     val title : String,
     val description : String,

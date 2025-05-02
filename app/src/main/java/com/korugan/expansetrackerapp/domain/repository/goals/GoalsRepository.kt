@@ -7,8 +7,8 @@ import java.util.Date
 interface GoalsRepository {
     fun getAllGoals() : Flow<List<Goals>>
     suspend fun insertGoal(goal: Goals)
-    suspend fun deleteGoal(goal: Goals)
+    suspend fun deleteGoal(id: Int)
     suspend fun updateGoal(goal: Goals)
-    suspend fun getGoalsByStatus(status: String): Flow<List<Goals>>
-    suspend fun getOverdueGoals(currentDate: Date): Flow<List<Goals>>
+    fun getGoalsByStatus(status: String): Flow<List<Goals>>
+    fun getOverdueGoals(currentDate: Date): Flow<List<Goals>>
 }

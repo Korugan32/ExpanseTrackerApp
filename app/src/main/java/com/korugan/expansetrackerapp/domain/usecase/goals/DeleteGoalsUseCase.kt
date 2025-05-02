@@ -7,7 +7,7 @@ import javax.inject.Inject
 class DeleteGoalsUseCase @Inject constructor(
     private val goalsRepository: GoalsRepository
 ) {
-    suspend operator fun invoke(goal: Goals) {
-        goalsRepository.deleteGoal(goal)
+    suspend operator fun invoke(id: Int) {
+        goalsRepository.deleteGoal(id)
     }
 }
