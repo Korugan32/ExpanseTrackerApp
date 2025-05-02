@@ -3,11 +3,12 @@ package com.korugan.expansetrackerapp.data.repository.goals
 import com.korugan.expansetrackerapp.data.local.goals.dao.GoalsDao
 import com.korugan.expansetrackerapp.data.local.goals.entity.Goals
 import com.korugan.expansetrackerapp.domain.repository.goals.GoalsRepository
+import kotlinx.coroutines.flow.Flow
 import java.util.Date
 import javax.inject.Inject
 
 class GoalsRepositoryImpl @Inject constructor(private val goalsDao: GoalsDao) : GoalsRepository {
-    override fun getAllGoals(): List<Goals> {
+    override fun getAllGoals(): Flow<List<Goals>> {
         return goalsDao.getAllGoals()
     }
 
@@ -23,11 +24,11 @@ class GoalsRepositoryImpl @Inject constructor(private val goalsDao: GoalsDao) : 
         return goalsDao.updateGoal(goal)
     }
 
-    override suspend fun getGoalsByStatus(status: String): List<Goals> {
+    override suspend fun getGoalsByStatus(status: String): Flow<List<Goals>>{
         return goalsDao.getGoalsByStatus(status)
     }
 
-    override suspend fun getOverdueGoals(currentDate: Date): List<Goals> {
+    override suspend fun getOverdueGoals(currentDate: Date): Flow<List<Goals>> {
         return goalsDao.getOverdueGoals(currentDate)
     }
 }

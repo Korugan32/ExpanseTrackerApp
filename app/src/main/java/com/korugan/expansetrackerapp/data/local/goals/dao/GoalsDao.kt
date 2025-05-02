@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.korugan.expansetrackerapp.data.local.goals.entity.Goals
+import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
 @Dao
@@ -20,11 +21,11 @@ interface GoalsDao {
     suspend fun deleteGoal(goal: Goals)
 
     @Query("SELECT * FROM goals")
-    fun getAllGoals(): List<Goals>
+    fun getAllGoals(): Flow<List<Goals>>
 
     @Query("SELECT * FROM goals WHERE status = :status")
-    suspend fun getGoalsByStatus(status: String): List<Goals>
+    fun getGoalsByStatus(status: String): Flow<List<Goals>>
 
     @Query("SELECT * FROM goals WHERE deadline < :currentDate")
-    suspend fun getOverdueGoals(currentDate: Date): List<Goals>
+    fun getOverdueGoals(currentDate: Date): Flow<List<Goals>>
 }
