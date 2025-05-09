@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetGoalsByStatusUseCase @Inject constructor(
     private val goalsRepository: GoalsRepository
 ) {
-    suspend operator fun invoke(status: String): Flow<List<Goals>> {
+    operator fun invoke(status: String): Flow<List<Goals>> {
         return goalsRepository.getGoalsByStatus(status)
     }
 }

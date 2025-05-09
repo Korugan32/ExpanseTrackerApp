@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetOverdueGoalsUseCase @Inject constructor(
     private val goalsRepository: GoalsRepository
 ) {
-    suspend operator fun invoke(currentDate: Date): Flow<List<Goals>> {
+    operator fun invoke(currentDate: Date): Flow<List<Goals>> {
         return goalsRepository.getOverdueGoals(currentDate)
     }
 }

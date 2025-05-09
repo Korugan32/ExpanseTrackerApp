@@ -29,4 +29,7 @@ interface GoalsDao {
 
     @Query("SELECT * FROM Goals WHERE deadline < :currentDate")
     fun getOverdueGoals(currentDate: Date): Flow<List<Goals>>
+
+    @Query("SELECT * FROM Goals WHERE id = :id")
+    fun getGoalById(id: Int): Flow<Goals>
 }

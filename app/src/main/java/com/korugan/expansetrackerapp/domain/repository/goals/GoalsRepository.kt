@@ -11,4 +11,5 @@ interface GoalsRepository {
     suspend fun updateGoal(goal: Goals)
     fun getGoalsByStatus(status: String): Flow<List<Goals>>
     fun getOverdueGoals(currentDate: Date): Flow<List<Goals>>
+    fun getGoalByID(id : Int) : Flow<Goals>
 }

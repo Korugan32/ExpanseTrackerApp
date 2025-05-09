@@ -31,4 +31,8 @@ class GoalsRepositoryImpl @Inject constructor(private val goalsDao: GoalsDao) : 
     override fun getOverdueGoals(currentDate: Date): Flow<List<Goals>> {
         return goalsDao.getOverdueGoals(currentDate)
     }
+
+    override fun getGoalByID(id: Int): Flow<Goals> {
+        return goalsDao.getGoalById(id)
+    }
 }
