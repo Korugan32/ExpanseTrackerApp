@@ -183,7 +183,7 @@ fun CryptoDetailsScreen(
                                 color = MaterialTheme.colorScheme.onBackground
                             )
                         ),
-                        data = remember {
+                        data =
                             listOf(
                                 Line(
                                     label = "$symbol $interval Graph",
@@ -195,8 +195,7 @@ fun CryptoDetailsScreen(
                                     gradientAnimationDelay = 1000,
                                     drawStyle = DrawStyle.Stroke(width = 2.dp),
                                 ),
-                            )
-                        },
+                            ),
                         animationMode = AnimationMode.Together(delayBuilder = {
                             it * 500L
                         }),
