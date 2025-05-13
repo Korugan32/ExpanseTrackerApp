@@ -26,7 +26,8 @@ fun TextFieldItem(
     placeHolder: @Composable () -> Unit,
     text: String,
     onValueChange: (String) -> Unit,
-    keyboardOptions: KeyboardOptions
+    keyboardOptions: KeyboardOptions,
+    enabled : Boolean = true
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -54,12 +55,17 @@ fun TextFieldItem(
             ),
             maxLines = 1,
             colors = TextFieldDefaults.colors(
+                disabledContainerColor = MaterialTheme.colorScheme.background,
                 unfocusedContainerColor = MaterialTheme.colorScheme.background,
                 focusedContainerColor = MaterialTheme.colorScheme.background,
+                disabledIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledTextColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                disabledLabelColor = MaterialTheme.colorScheme.onBackground
             ),
             placeholder = placeHolder,
+            enabled = enabled
         )
     }
 }
