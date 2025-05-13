@@ -9,7 +9,8 @@ data class Goals (
     val title : String,
     val description : String,
     val deadline : Date,
-    val progress : Int,
+    val progress : Double,
+    val totalInsert : Double,
     val status : String,
     val price : Double,
     @PrimaryKey(autoGenerate = true)
