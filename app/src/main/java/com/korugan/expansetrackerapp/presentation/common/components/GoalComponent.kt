@@ -7,40 +7,38 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import blue
 import com.korugan.expansetrackerapp.R
-import com.korugan.expansetrackerapp.presentation.ui.theme.blue
-import com.korugan.expansetrackerapp.presentation.ui.theme.gray
-import com.korugan.expansetrackerapp.presentation.ui.theme.green
+import com.korugan.expansetrackerapp.data.local.goals.entity.Goals
+import kotlin.math.abs
 
 @Composable
-fun GoalComponent() {
+fun GoalComponent(goals: Goals,navController: NavController) {
     Row(
         Modifier
             .clip(RoundedCornerShape(18.dp))
-            .background(Color.White)
-            .clickable {  },
+            .background(MaterialTheme.colorScheme.onPrimary)
+            .clickable { navController.navigate("goalDetails/${goals.id}") },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row(
@@ -62,19 +60,18 @@ fun GoalComponent() {
                 .padding(8.dp)
         ) {
             Text(
-                text = "Play Station",
+                text = goals.title,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
             Spacer(modifier = Modifier.height(5.dp))
             LinearProgressIndicator(
-                progress = 0.75f,
-                color = green,
+                progress = (goals.progress/100).toFloat(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(4.dp)
                     .clip(RoundedCornerShape(8.dp)),
-                trackColor = Color.LightGray
+                trackColor = Color.Gray.copy(0.4f)
             )
             Row(
                 modifier = Modifier
@@ -83,13 +80,13 @@ fun GoalComponent() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Saved $2,200 / 80%",
+                    text = "Saved $${String.format("%.1f",goals.totalInsert)} / %" + String.format("%.1f", abs(goals.progress)),
                     fontSize = 15.sp,
                     fontFamily = FontFamily.SansSerif,
                     color = blue
                 )
                 Text(
-                    text = "Total : $3.300",
+                    text = "Total : $${goals.price}",
                     fontSize = 15.sp
                 )
             }
