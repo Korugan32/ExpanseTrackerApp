@@ -19,17 +19,12 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getAllAssetUseCase: GetAllAssetUseCase,
-    private val getAllFinancialUseCase: GetAllFinancialUseCase,
-    private val getPositiveFinancialUseCase: GetPositiveFinancialUseCase,
-    private val getNegativeFinancialUseCase: GetNegativeFinancialUseCase,
     private val deleteAssetUseCase: DeleteAssetUseCase,
-    private val deleteFinancialUseCase: DeleteFinancialUseCase
+    private val getAllFinancialUseCase: GetAllFinancialUseCase
 ) : ViewModel() {
 
     init {
         getAllFinancial()
-        getAllNegativeFinancial()
-        getAllPositiveFinancial()
         getAllAssets()
     }
 
@@ -40,28 +35,6 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             getAllFinancialUseCase.invoke().collect{
                 _allFinancial.value = it
-            }
-        }
-    }
-
-    private val _allPositiveFinancial = MutableStateFlow<List<Financials>>(emptyList())
-    val allPositiveFinancial : StateFlow<List<Financials>> = _allPositiveFinancial
-
-    private fun getAllPositiveFinancial(){
-        viewModelScope.launch {
-            getPositiveFinancialUseCase.invoke().collect{
-                _allPositiveFinancial.value = it
-            }
-        }
-    }
-
-    private val _allNegativeFinancial = MutableStateFlow<List<Financials>>(emptyList())
-    val allNegativeFinancial : StateFlow<List<Financials>> = _allNegativeFinancial
-
-    private fun getAllNegativeFinancial(){
-        viewModelScope.launch {
-            getNegativeFinancialUseCase.invoke().collect{
-                _allNegativeFinancial.value = it
             }
         }
     }
@@ -80,12 +53,6 @@ class MainViewModel @Inject constructor(
     fun deleteAsset(id : Int){
         viewModelScope.launch {
             deleteAssetUseCase.invoke(id)
-        }
-    }
-
-    fun deleteFinancial(id : Int){
-        viewModelScope.launch {
-            deleteFinancialUseCase.invoke(id)
         }
     }
 }

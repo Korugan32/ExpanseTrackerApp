@@ -65,8 +65,8 @@ fun MainScreen(
     sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
     val allFinancial = viewModel.allFinancial.collectAsState()
-    val allPositiveFinancial = viewModel.allPositiveFinancial.collectAsState()
-    val allNegativeFinancial = viewModel.allNegativeFinancial.collectAsState()
+    val allPositiveFinancial = sharedViewModel.allPositiveFinancial.collectAsState()
+    val allNegativeFinancial = sharedViewModel.allNegativeFinancial.collectAsState()
     val allAssets = viewModel.allAssets.collectAsState()
     val crypto = sharedViewModel.cryptoTickerState.collectAsState()
     val stock = sharedViewModel.stockQuoteState.collectAsState()
@@ -295,7 +295,7 @@ fun MainScreen(
                         allFinancial.value[index].name,
                         allFinancial.value[index].amount,
                         allFinancial.value[index].description,
-                    ) { viewModel.deleteFinancial(allFinancial.value[index].id) }
+                    ) { sharedViewModel.deleteFinancial(allFinancial.value[index].id) }
                 }
             }
         }
