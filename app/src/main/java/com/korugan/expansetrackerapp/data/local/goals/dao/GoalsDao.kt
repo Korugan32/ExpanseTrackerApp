@@ -31,5 +31,5 @@ interface GoalsDao {
     fun getOverdueGoals(currentDate: Date): Flow<List<Goals>>
 
     @Query("SELECT * FROM Goals WHERE id = :id")
-    fun getGoalById(id: Int): Flow<Goals>
+    fun getGoalById(id: Int): Flow<Goals?>
 }

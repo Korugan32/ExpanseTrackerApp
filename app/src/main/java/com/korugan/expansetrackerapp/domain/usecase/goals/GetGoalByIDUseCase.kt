@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetGoalByIDUseCase @Inject constructor(
     private val goalsRepository: GoalsRepository
 ) {
-    operator fun invoke(id: Int): Flow<Goals> {
+    operator fun invoke(id: Int): Flow<Goals?> {
         return goalsRepository.getGoalByID(id)
     }
 }

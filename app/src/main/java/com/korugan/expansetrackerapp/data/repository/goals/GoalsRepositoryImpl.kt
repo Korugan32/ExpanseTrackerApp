@@ -17,7 +17,7 @@ class GoalsRepositoryImpl @Inject constructor(private val goalsDao: GoalsDao) : 
     }
 
     override suspend fun deleteGoal(id : Int) {
-        return goalsDao.deleteGoal(id)
+        goalsDao.deleteGoal(id)
     }
 
     override suspend fun updateGoal(goal: Goals) {
@@ -32,7 +32,7 @@ class GoalsRepositoryImpl @Inject constructor(private val goalsDao: GoalsDao) : 
         return goalsDao.getOverdueGoals(currentDate)
     }
 
-    override fun getGoalByID(id: Int): Flow<Goals> {
+    override fun getGoalByID(id: Int): Flow<Goals?> {
         return goalsDao.getGoalById(id)
     }
 }
