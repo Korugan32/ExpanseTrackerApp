@@ -12,8 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -71,7 +71,8 @@ fun GoalComponent(goals: Goals,navController: NavController) {
                     .fillMaxWidth()
                     .height(4.dp)
                     .clip(RoundedCornerShape(8.dp)),
-                trackColor = Color.Gray.copy(0.4f)
+                backgroundColor = Color.Gray.copy(0.4f),
+                color = MaterialTheme.colorScheme.primary
             )
             Row(
                 modifier = Modifier
