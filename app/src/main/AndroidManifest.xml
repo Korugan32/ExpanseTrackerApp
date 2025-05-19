@@ -17,6 +17,10 @@
         android:theme="@style/Theme.ExpanseTrackerApp"
         tools:targetApi="31"
         tools:ignore="DiscouragedApi">
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:node="remove" />
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
