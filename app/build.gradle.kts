@@ -1,26 +1,23 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt")
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    id("kotlin-kapt")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
     namespace = "com.korugan.expansetrackerapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.korugan.expansetrackerapp"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
@@ -29,19 +26,24 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -50,32 +52,23 @@ android {
 }
 
 dependencies {
-    // AndroidX Core
+    // Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.activity.compose)
 
-    // Jetpack Compose
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.runtime.livedata)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation (libs.coil.compose)
-    implementation(libs.androidx.material)
-
-
-    // Testing
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
 
     // Navigation
     implementation(libs.navigation)
@@ -85,28 +78,41 @@ dependencies {
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
 
-    // Room Database
+    // Room
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
-    // Dagger Hilt
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.hilt.work)
-    implementation(libs.androidx.work.runtime.ktx)
-    ksp(libs.hilt.compiler)
+    // DataStore
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences.core)
 
-    // Retrofit
+    // Retrofit + OkHttp
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
-    // DataStore
-    implementation(libs.androidx.datastore.preferences) // Preferences
-    implementation(libs.androidx.datastore.preferences.core)
+    // Coil
+    implementation(libs.coil.compose)
 
     // Compose Charts
     implementation(libs.compose.charts)
+
+    // WorkManager + Hilt
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+    kapt(libs.hilt.compiler)
+
+    // Dagger Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.androidx.hilt.compiler)
+
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 }
