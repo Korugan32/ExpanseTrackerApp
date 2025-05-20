@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.core.EaseInOutCubic
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -295,6 +294,7 @@ fun MainScreen(
                         allFinancial.value[index].name,
                         allFinancial.value[index].amount,
                         allFinancial.value[index].description,
+                        allFinancial.value[index].createDate
                     ) { sharedViewModel.deleteFinancial(allFinancial.value[index].id) }
                 }
             }

@@ -37,9 +37,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.korugan.expansetrackerapp.R
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Composable
-fun Transaction(text: String, value: Double, description: String, onclick: () -> Unit = {}) {
+fun Transaction(
+    text: String,
+    value: Double,
+    description: String,
+    date: Date,
+    onclick: () -> Unit = {}
+) {
+    val formatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+    val formattedDate = formatter.format(date)
     var expanded by remember { mutableStateOf(false) }
     val cardHeight by animateDpAsState(
         targetValue = if (expanded) 120.dp else 80.dp,
@@ -74,7 +85,7 @@ fun Transaction(text: String, value: Double, description: String, onclick: () ->
                 Spacer(Modifier.padding(5.dp))
                 Column {
                     Text(text, fontSize = 18.sp, fontWeight = FontWeight.W500)
-                    Text("19-09-24", color = Color.Gray)
+                    Text(formattedDate, color = Color.Gray)
                 }
             }
             Row(verticalAlignment = Alignment.CenterVertically) {

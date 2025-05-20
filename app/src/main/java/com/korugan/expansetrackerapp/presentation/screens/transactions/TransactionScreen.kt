@@ -85,7 +85,8 @@ fun TransactionScreen(
                 Transaction(
                     positiveFinancial.value[index].name,
                     positiveFinancial.value[index].amount,
-                    positiveFinancial.value[index].description
+                    positiveFinancial.value[index].description,
+                    positiveFinancial.value[index].createDate
                 )
             }
             item {
@@ -114,7 +115,8 @@ fun TransactionScreen(
                 Transaction(
                     negativeFinancial.value[index].name,
                     negativeFinancial.value[index].amount,
-                    negativeFinancial.value[index].description
+                    negativeFinancial.value[index].description,
+                    negativeFinancial.value[index].createDate
                 )
             }
         }
