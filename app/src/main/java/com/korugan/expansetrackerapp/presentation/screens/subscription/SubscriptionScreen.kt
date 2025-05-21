@@ -102,7 +102,7 @@ fun SubscriptionScreen(
                         Spacer(Modifier.padding(5.dp))
                         Column {
                             Text(sub.title, fontSize = 18.sp, fontWeight = FontWeight.W500)
-                            Text("19-09-24", color = Color.Gray)
+                            Text("Renews monthly on the "+sub.dayOfMonth, color = Color.Gray)
                         }
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
