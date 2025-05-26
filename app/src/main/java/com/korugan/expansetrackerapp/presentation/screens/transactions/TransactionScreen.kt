@@ -87,7 +87,9 @@ fun TransactionScreen(
                     positiveFinancial.value[index].amount,
                     positiveFinancial.value[index].description,
                     positiveFinancial.value[index].createDate
-                )
+                ){
+                    viewModel.deleteFinancial(positiveFinancial.value[index].id)
+                }
             }
             item {
                 Column(Modifier.padding(15.dp)) {
@@ -117,7 +119,9 @@ fun TransactionScreen(
                     negativeFinancial.value[index].amount,
                     negativeFinancial.value[index].description,
                     negativeFinancial.value[index].createDate
-                )
+                ){
+                    viewModel.deleteFinancial(negativeFinancial.value[index].id)
+                }
             }
         }
     }
