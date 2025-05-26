@@ -77,7 +77,7 @@ fun GoalsDetailsScreen(
     val uiEvent by viewModel.uiEvent.collectAsState()
     val goal = viewModel.goal.collectAsState()
     var isEdit by remember { mutableStateOf(false) }
-    var transaction by remember { mutableStateOf("") }
+    var transaction by remember { mutableStateOf("0") }
     val dataPickerState = rememberDatePickerState()
 
     LaunchedEffect(uiEvent) {
@@ -313,8 +313,8 @@ fun GoalsDetailsScreen(
                     Button(
                         onClick = {
                             /*.replace(",", ".") for locale differences*/
-                            val t = transaction.replace(",", ".").toDouble()
                             if (transaction.isNotEmpty()) {
+                                val t = transaction.replace(",", ".").toDouble()
                                 if (t.toDouble() != 0.0) {
                                     if ((t + goal.totalInsert <= goal.price) && (t + goal.totalInsert >= 0)) {
                                         progress = ((t + (goal.price * (goal.progress / 100))) / goal.price) * 100
