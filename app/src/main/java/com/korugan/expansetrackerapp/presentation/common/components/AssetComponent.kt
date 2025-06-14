@@ -19,7 +19,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +48,7 @@ import java.text.SimpleDateFormat
 fun AssetComponent(assets: Assets, currentAssetPrice: Double?, onClick: () -> Unit = {}) {
     var expanded by remember { mutableStateOf(false) }
     val cardHeight by animateDpAsState(
-        targetValue = if (expanded) 140.dp else 70.dp,
+        targetValue = if (expanded) 160.dp else 69.dp,
         label = "ExpandAnimation"
     )
     val rotation by animateFloatAsState(
@@ -54,19 +56,19 @@ fun AssetComponent(assets: Assets, currentAssetPrice: Double?, onClick: () -> Un
         label = "RotationAnimation"
     )
 
-    Column(
+    ElevatedCard(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp))
-            .background(MaterialTheme.colorScheme.onPrimary)
-            .clickable { expanded = !expanded }
             .height(cardHeight)
-            .padding(10.dp),
-    ) {
+            .padding(horizontal = 10.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.onPrimary
+        ))
+     {
         if (currentAssetPrice != null) {
             val dif = currentAssetPrice - assets.purchasePrice
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().clickable { expanded = !expanded }.padding(vertical = 10.dp, horizontal = 5.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -121,29 +123,30 @@ fun AssetComponent(assets: Assets, currentAssetPrice: Double?, onClick: () -> Un
                 }
             }
             if (expanded) {
-                Text(
-                    "Total Worth : " + String.format(
-                        "$%.2f",
-                        (currentAssetPrice * assets.amount)
+                Column(Modifier.padding(horizontal = 10.dp)) {
+                    Text(
+                        "Total Worth : " + String.format(
+                            "$%.2f",
+                            (currentAssetPrice * assets.amount)
+                        )
                     )
-                )
-
-                Text("Description :  ${assets.description}")
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text("Date : " + SimpleDateFormat("dd.MM.yy").format(assets.createDate))
-                    IconButton(
-                        onClick =  onClick ,
-                        content = {
-                            Icon(
-                                Icons.Default.Delete, contentDescription = "DeleteIcon",
-                                tint = MaterialTheme.colorScheme.inverseSurface,
-                            )
-                        }
-                    )
+                    Text("Description :  ${assets.description}")
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("Date : " + SimpleDateFormat("dd.MM.yy").format(assets.createDate))
+                        IconButton(
+                            onClick = onClick,
+                            content = {
+                                Icon(
+                                    Icons.Default.Delete, contentDescription = "DeleteIcon",
+                                    tint = MaterialTheme.colorScheme.inverseSurface,
+                                )
+                            }
+                        )
+                    }
                 }
             }
         } else {
