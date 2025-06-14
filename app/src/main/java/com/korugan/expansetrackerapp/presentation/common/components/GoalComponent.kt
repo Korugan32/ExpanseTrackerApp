@@ -1,12 +1,10 @@
 package com.korugan.expansetrackerapp.presentation.common.components
 
-import androidx.compose.foundation.background
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,12 +12,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -32,41 +32,13 @@ import com.korugan.expansetrackerapp.R
 import com.korugan.expansetrackerapp.data.local.goals.entity.Goals
 import kotlin.math.abs
 
+@SuppressLint("DefaultLocale")
 @Composable
-fun GoalComponent(goals: Goals,navController: NavController) {
-    Row(
-        Modifier
-            .clip(RoundedCornerShape(18.dp))
-            .background(MaterialTheme.colorScheme.onPrimary)
-            .clickable { navController.navigate("goalDetails/${goals.id}") },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxHeight(0.1f)
-                .padding(8.dp)
-                .clip(RoundedCornerShape(16.dp)),
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.goal),
-                contentDescription = "Icon",
-                modifier = Modifier
-                    .size(50.dp)
-            )
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Text(
-                text = goals.title,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            )
-            Spacer(modifier = Modifier.height(5.dp))
+fun GoalComponent(goals: Goals, navController: NavController) {
+    ListItem(
+        headlineContent = {
             LinearProgressIndicator(
-                progress = (goals.progress/100).toFloat(),
+                progress = (goals.progress / 100).toFloat(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(4.dp)
@@ -74,14 +46,38 @@ fun GoalComponent(goals: Goals,navController: NavController) {
                 backgroundColor = Color.Gray.copy(0.4f),
                 color = MaterialTheme.colorScheme.primary
             )
+        },
+        modifier = Modifier
+            .shadow(8.dp, shape = RoundedCornerShape(15.dp))
+            .clickable { navController.navigate("goalDetails/${goals.id}") },
+        colors = ListItemDefaults.colors(
+            containerColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        overlineContent = {
+            Text(
+                modifier = Modifier.padding(bottom = 4.dp),
+                text = goals.title,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
+        },
+        supportingContent = {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 5.dp),
+                    .padding(top = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Saved $${String.format("%.1f",goals.totalInsert)} / %" + String.format("%.1f", abs(goals.progress)),
+                    text = "Saved $${
+                        String.format(
+                            "%.1f",
+                            goals.totalInsert
+                        )
+                    } / %" + String.format(
+                        "%.1f",
+                        abs(goals.progress)
+                    ),
                     fontSize = 15.sp,
                     fontFamily = FontFamily.SansSerif,
                     color = blue
@@ -91,7 +87,15 @@ fun GoalComponent(goals: Goals,navController: NavController) {
                     fontSize = 15.sp
                 )
             }
-        }
-    }
+        },
+        leadingContent = {
+            Icon(
+                painter = painterResource(id = R.drawable.goal),
+                contentDescription = "Icon",
+                modifier = Modifier
+                    .size(59.dp)
+            )
+        },
+    )
     Spacer(Modifier.padding(5.dp))
 }
