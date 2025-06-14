@@ -132,7 +132,7 @@ fun MainScreen(
                 }
                 Spacer(Modifier.padding(5.dp))
                 /* Income and Expense Components */
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                     if(allPositiveFinancial.value.sumOf { it.amount } != 0.0 || allNegativeFinancial.value.sumOf { it.amount } != 0.0){
                         IncomeExpense(allPositiveFinancial.value.sumOf { it.amount })
                         IncomeExpense(allNegativeFinancial.value.sumOf { it.amount })
