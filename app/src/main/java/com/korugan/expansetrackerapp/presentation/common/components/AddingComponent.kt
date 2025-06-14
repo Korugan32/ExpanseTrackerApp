@@ -25,7 +25,12 @@ import androidx.compose.ui.unit.sp
 import blue
 
 @Composable
-fun AddingComponent(text: String, iconResource: Int, onClick: () -> Unit = {}) {
+fun AddingComponent(
+    text: String,
+    iconResource: Int,
+    isSubscription: Boolean = false,
+    onClick: () -> Unit = {},
+) {
     Row(
         Modifier
             .fillMaxWidth()
@@ -37,11 +42,11 @@ fun AddingComponent(text: String, iconResource: Int, onClick: () -> Unit = {}) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
+            if (isSubscription) Icon(
                 painterResource(iconResource),
                 "",
                 modifier = Modifier.size(20.dp)
-            )
+            ) else Image(painterResource(iconResource), "", modifier = Modifier.size(20.dp))
             Spacer(Modifier.padding(2.dp))
             Text(text, color = MaterialTheme.colorScheme.onBackground, fontSize = 18.sp)
         }
